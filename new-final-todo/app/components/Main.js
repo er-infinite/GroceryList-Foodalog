@@ -24,11 +24,11 @@ export default class App extends React.Component {
                 <View style ={styles.container}>
 
                     <View style={styles.header}>
-                        <Text style={styles.headerText}>Food-A-Log</Text>
+                        <Text style={styles.headerText}>FOOD-A-LOG</Text>
                     </View>
 
                     <ScrollView style={styles.scrollContainer}>
-                        {notes}
+                        {notes}ss
                     </ScrollView>
 
 
@@ -38,7 +38,7 @@ export default class App extends React.Component {
                             style={styles.textInput}
                             onChangeText ={(noteText) => this.setState({noteText})}
                             value={this.state.noteText}
-                            placeholder="Type your note here"
+                            placeholder="What would you like to add?"
                             placeholderTextColor="white"
                             underlineColorAndroid ="transparent">
                         </TextInput>
@@ -94,12 +94,12 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 25,
         padding: 26,
     },
     scrollContainer:{
         flex: 1,
-        marginBottom: 100,
+        marginBottom: 110,
     },
     footer: {
         position: 'absolute',

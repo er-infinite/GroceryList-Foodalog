@@ -27,21 +27,17 @@ export default class Note extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            textColor: 'red',
+            //textColor: 'red',
         };
     }
 
-    changeStyle() {
-        this.setState({
-            textColor: 'green',
-        })
 
-    };
 
     complete() {
         this.setState({
             backgroundColor: 'purple',
-            textColor: 'green',
+            //textColor: 'green',
+            textDecorationLine: 'line-through',
         })
 
     };
@@ -56,7 +52,7 @@ export default class Note extends Component {
                     <View style={[styles.checkboxEmpty , {backgroundColor:this.state.backgroundColor}]} />
 
                 {/*<TouchableOpacity onPress={ () => this.changeStyle() } style={{ height: 30, flexDirection: 'row' }}>*/}
-                    <Text style={[styles.noteText, {fontFamily: 'sans-serif-thin'}, {color:this.state.textColor}]}>{this.props.val.note}</Text>
+                    <Text style={[styles.noteText, {fontFamily: 'sans-serif-thin'}, {color:this.state.textColor}, {textDecorationLine: this.state.textDecorationLine}]}>{this.props.val.note}</Text>
                 {/*</TouchableOpacity>*/}
                 </TouchableOpacity>
 
@@ -84,10 +80,7 @@ const styles = StyleSheet.create({
     },
     noteText: {
         paddingLeft: 20,
-        //borderLeftWidth: 10,
-        //borderLeftHeight: 10,
-        //borderLeftColor: '#E91E63',
-        //color:'red'
+        fontSize: 20,
     },
     noteDelete:{
         position: 'absolute',

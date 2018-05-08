@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import Note from './Note';
-
+//import { CheckBox } from 'react-native-elements';
 export default class App extends React.Component {
 
     constructor(props){
@@ -13,11 +13,14 @@ export default class App extends React.Component {
     }
     render() {
 
+        //isStrikeThrough: false;
         let notes = this.state.noteArray.map((val,key) => {
-            return <Note key={key} keyval={key} val={key}
-                   deleteMethod={ ()=> this.deleteNote(key)} />
+            return <Note key={key} keyval={key} val={val}
+                   deleteMethod={ ()=> this.deleteNote(key)}
+                    completeMethod = { ()=> this.completeNote()}/>
         });
         return (
+            <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
             <View style ={styles.container}>
 
                 <View style={styles.header}>
@@ -26,24 +29,28 @@ export default class App extends React.Component {
 
                 <ScrollView style={styles.scrollContainer}>
                     {notes}
-
                 </ScrollView>
 
+
                 <View style={styles.footer}>
+
                     <TextInput
                        style={styles.textInput}
                        onChangeText ={(noteText) => this.setState({noteText})}
                        value={this.state.noteText}
-                       placeholder="note"
+                       placeholder="Type your note here"
                        placeholderTextColor="white"
                        underlineColorAndroid ="transparent">
                     </TextInput>
+
                 </View>
+
 
                 <TouchableOpacity onPress={this.addNote.bind(this)}style={styles.addButton}>
                     <Text style={styles.addButtonText}>+</Text>
                 </TouchableOpacity>
             </View>
+            </KeyboardAvoidingView>
         );
     }
 
@@ -66,6 +73,11 @@ export default class App extends React.Component {
         this.state.noteArray.splice(key,1);
         this.setState({noteArray: this.state.noteArray})
     }
+
+
+
+
+
 
 }
 
@@ -110,8 +122,8 @@ const styles = StyleSheet.create({
         right: 20,
         bottom: 90,
         backgroundColor: '#E91E63',
-        width: 90,
-        height: 90,
+        width: 60,
+        height: 60,
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',

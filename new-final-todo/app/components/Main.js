@@ -16,40 +16,40 @@ export default class App extends React.Component {
         //isStrikeThrough: false;
         let notes = this.state.noteArray.map((val,key) => {
             return <Note key={key} keyval={key} val={val}
-                   deleteMethod={ ()=> this.deleteNote(key)}
-                    completeMethod = { ()=> this.completeNote()}/>
+                         deleteMethod={ ()=> this.deleteNote(key)}
+                         completeMethod = { ()=> this.completeNote()}/>
         });
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-            <View style ={styles.container}>
+                <View style ={styles.container}>
 
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>- TO-DOS -</Text>
+                    <View style={styles.header}>
+                        <Text style={styles.headerText}>Food-A-Log</Text>
+                    </View>
+
+                    <ScrollView style={styles.scrollContainer}>
+                        {notes}
+                    </ScrollView>
+
+
+                    <View style={styles.footer}>
+
+                        <TextInput
+                            style={styles.textInput}
+                            onChangeText ={(noteText) => this.setState({noteText})}
+                            value={this.state.noteText}
+                            placeholder="Type your note here"
+                            placeholderTextColor="white"
+                            underlineColorAndroid ="transparent">
+                        </TextInput>
+
+                    </View>
+
+
+                    <TouchableOpacity onPress={this.addNote.bind(this)}style={styles.addButton}>
+                        <Text style={styles.addButtonText}>+</Text>
+                    </TouchableOpacity>
                 </View>
-
-                <ScrollView style={styles.scrollContainer}>
-                    {notes}
-                </ScrollView>
-
-
-                <View style={styles.footer}>
-
-                    <TextInput
-                       style={styles.textInput}
-                       onChangeText ={(noteText) => this.setState({noteText})}
-                       value={this.state.noteText}
-                       placeholder="Type your note here"
-                       placeholderTextColor="white"
-                       underlineColorAndroid ="transparent">
-                    </TextInput>
-
-                </View>
-
-
-                <TouchableOpacity onPress={this.addNote.bind(this)}style={styles.addButton}>
-                    <Text style={styles.addButtonText}>+</Text>
-                </TouchableOpacity>
-            </View>
             </KeyboardAvoidingView>
         );
     }
@@ -86,11 +86,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-        backgroundColor: '#E91E63',
+        backgroundColor: '#6b449e',
         alignItems: 'center',
         justifyContent: 'center',
         borderBottomWidth: 10,
-        borderBottomColor: '#ddd',
+        borderBottomColor: '#7e66d6',
     },
     headerText: {
         color: 'white',
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         zIndex: 11,
         right: 20,
         bottom: 90,
-        backgroundColor: '#E91E63',
+        backgroundColor: '#6b449e',
         width: 60,
         height: 60,
         borderRadius: 50,

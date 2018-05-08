@@ -7,62 +7,70 @@ import {
     TouchableOpacity,
     TouchableHighlight,
 } from 'react-native';
+import {Font} from 'expo';
 
 
 export default class Note extends Component {
+
+    // state = {
+    //     fontLoaded: false,
+    // };
+    //
+    // async componentDidMount() {
+    //     await Font.loadAsync({
+    //         'montserrat': require('./assets/fonts/Montserrat-Bold.ttf'),
+    //     });
+    //
+    //     this.setState({ fontLoaded: true });
+    // }
 
     constructor(props) {
         super(props);
         this.state = {
             textColor: 'red',
-    };
+        };
     }
 
     changeStyle() {
-
         this.setState({
-          textColor: 'green',
+            textColor: 'green',
+        })
+
+    };
+
+    complete() {
+        this.setState({
+            backgroundColor: 'purple',
+            textColor: 'green',
         })
 
     };
 
     render() {
 
-       return (
+        return (
 
             <View key={this.props.keyval} style={styles.note}>
 
-                <TouchableOpacity onPress={ () => this.changeStyle()} style={{ height: 30, flexDirection: 'row' }}>
-                    {/*<Text style={styles.noteText}>{this.props.val.date}</Text>*/}
-                    <Text style={[styles.noteText, {color:this.state.textColor}]}>{this.props.val.note}</Text>
-                </TouchableOpacity>
-                {/*<TouchableOpacity color={this.state.textColor} onPress={onButtonPress}>*/}
-                    {/*<Text style={styles.noteText}>{this.props.val.date}</Text>*/}
-                    {/*<Text style={styles.noteText}>{this.props.val.note}</Text>*/}
+                <TouchableOpacity onPress={ () => this.complete() }  style={{ height: 30, flexDirection: 'row' }}>
+                    <View style={[styles.checkboxEmpty , {backgroundColor:this.state.backgroundColor}]} />
+
+                {/*<TouchableOpacity onPress={ () => this.changeStyle() } style={{ height: 30, flexDirection: 'row' }}>*/}
+                    <Text style={[styles.noteText, {fontFamily: 'sans-serif-thin'}, {color:this.state.textColor}]}>{this.props.val.note}</Text>
                 {/*</TouchableOpacity>*/}
-
-                <View style={styles.container}>
-                <TouchableOpacity onPress={this.props.EditMethod} style={styles.noteEdit}>
-                    <Text style={styles.noteEditText}>Edit</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
-                    <Text style={styles.noteDeleteText}>Delete</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
+                        <Text style={styles.noteDeleteText}>Delete</Text>
+                    </TouchableOpacity>
 
 
-                </View>
+
             </View>
         );
 
 
     }
-
-
-
-
-
-
 }
 
 
@@ -76,22 +84,20 @@ const styles = StyleSheet.create({
     },
     noteText: {
         paddingLeft: 20,
-        borderLeftWidth: 10,
-        borderLeftColor: '#E91E63',
+        //borderLeftWidth: 10,
+        //borderLeftHeight: 10,
+        //borderLeftColor: '#E91E63',
         //color:'red'
     },
-    noteDelete: {
-        position: 'relative',
+    noteDelete:{
+        position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#2980b9',
-        padding: 5,
+        padding: 10,
         top: 10,
         bottom: 10,
         right: 10,
-        flex: 1,
-        width: 80,
-        height: 40
     },
     noteDeleteText: {
         color: 'white'
@@ -114,5 +120,12 @@ const styles = StyleSheet.create({
     },
     noteCompleteText: {
         color: 'green',
-    }
+    },
+    checkboxEmpty:{
+        width: 30,
+        height: 30,
+        borderRadius: 20,
+        borderWidth: 5,
+        borderColor: 'purple'
+    },
 });
